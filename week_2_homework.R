@@ -11,7 +11,8 @@ hw2
 
 #1. Take your hw2 vector and removed all the NAs then select all the numbers 
 # between 14 and 38 inclusive, call this vector prob1.
-prob1 <- hw2[!is.na(hw2)]
+prob1 <- hw2[!is.na(hw2) & hw2>14 & hw2<38]
+prob1
 
 #2. Multiply each number in the prob1 vector by 3 to create a new vector 
 # called times3. Then add 10 to each number in your times3 vector to create 
