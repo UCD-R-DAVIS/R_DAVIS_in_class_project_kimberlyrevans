@@ -10,6 +10,12 @@ surveys2 <- surveys %>%
   
 head(surveys2)
 
+
+# can specify in head the number of rows in the pipe
+surveys2 <- surveys %>%
+  filter(weight>30 & weight<60) %>% 
+  head(n = 6)
+
 #Create a new tibble showing the maximum weight for each species + sex 
 #combination and name it biggest_critters. Sort the tibble to take a look at 
 #the biggest and smallest species + sex combinations. HINT: it’s easier to 
@@ -19,6 +25,10 @@ biggest_critters <- surveys%>%
   filter(!is.na(weight))%>%
   summarise(maxweight_speciessex = max(weight))%>%
   arrange(maxweight_speciessex)
+
+# why summarize & not mutate
+# mutate would keep the data set big (keeps all rows because it is adding to the og dataset)
+# summarize keeps it to just the group_by, smaller 64 obsverations
 
 biggest_critters%>%
   arrange(-maxweight_speciessex)
@@ -49,6 +59,15 @@ surveys_avg_weight<- surveys%>%
   group_by(species, sex)%>%
   mutate(avgweight = mean(weight))%>%
   select(species, sex, weight, avgweight)
+
+# if we want a mini summary table, we would use summarize and not mutate
+# and we have to remove weight because there is too many rows to be in a summary table
+surveys_avg_weight_mini <- surveys%>%
+  filter(!is.na(weight))%>%
+  group_by(species, sex)%>%
+  summarise(avgweight = mean(weight))%>%
+  select(species, sex, avgweight)
+
 
 #Take surveys_avg_weight and add a new column called above_average that 
 #contains logical values stating whether or not a row’s weight is above average 
