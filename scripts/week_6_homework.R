@@ -44,3 +44,10 @@ p_lifeexp2<- gapminder%>%
   xlab("Country")+
   ylab("Life Expectancy")+
   ggtitle("Life Expectancy of 5 Countries")
+# == instead of %in% means that we are saying we want a row with all of these, not just one of them
+# we only want any of these to appear, not all, so we used %in%
+
+
+# notes:
+
+# |> is a pipe that can be used without loading tidyverse
